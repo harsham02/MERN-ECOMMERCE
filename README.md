@@ -77,7 +77,7 @@ Admins can log in securely and manage the platform via the [Admin Panel](https:/
 
 I have successfully completed the development of the **Forever** e-commerce project. You can view or download the certificate of completion below:
 
-(https://drive.google.com/file/d/1RffJbUZjQ2cGI53bPwDaZ8U9k7E0Ddtx/view?usp=drivesdk) - certification link
+[Download Certificate](https://drive.google.com/file/d/1RffJbUZjQ2cGI53bPwDaZ8U9k7E0Ddtx/view?usp=drivesdk)
 
 ---
 
