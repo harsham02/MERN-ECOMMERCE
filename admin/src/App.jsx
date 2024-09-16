@@ -9,7 +9,7 @@ import Login from './components/Login'
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const backendUrl = import.meta.env.BACKEND_URL || 'http://localhost:4000';
+export const backendUrl = import.meta.env.BACKEND_URL || 'https://mern-ecommerce-backend-xi.vercel.app';
 export const currency = `\u20B9`;
 
 const App = () => {
