@@ -28,7 +28,7 @@ const Orders = ({ token }) => {
     const status = e.target.value;
     
     try {
-      const response = await axios.post('http://localhost:4000/api/order/status', { orderId, status }, { headers: { token } });
+      const response = await axios.post('https://mern-ecommerce-backend-xi.vercel.app/api/order/status', { orderId, status }, { headers: { token } });
       if (response.data.success) { 
         await fetchAllOrders();
       } else {
