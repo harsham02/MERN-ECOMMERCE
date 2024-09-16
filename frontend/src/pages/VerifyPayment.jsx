@@ -17,7 +17,7 @@ const VerifyPayment = () => {
            if(!token){
              return null;
            } 
-          const response = await axios.post(`http://localhost:4000/api/order/verifyStripe`, {success, orderId}, {headers: {token}});
+          const response = await axios.post(`https://mern-ecommerce-backend-xi.vercel.app/api/order/verifyStripe`, {success, orderId}, {headers: {token}});
 
           if(response.data.success) {
              setCartItems({});

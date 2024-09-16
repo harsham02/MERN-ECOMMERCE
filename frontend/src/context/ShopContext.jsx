@@ -17,8 +17,8 @@ const ShopContextProvider = ({ children }) => {
   const [token, setToken] = useState('');
 
   const addToCart = async (itemId, size) => {
-    
-    if(!size) {
+
+    if (!size) {
       toast.error('select Product size', {
         position: "top-center",
         autoClose: 5000,
@@ -28,47 +28,47 @@ const ShopContextProvider = ({ children }) => {
         draggable: true,
         progress: undefined,
         theme: "light"
-        });
+      });
       return;
     }
-     let cartData = structuredClone(cartItems);
+    let cartData = structuredClone(cartItems);
 
-     if(cartData[itemId]) {
-      if(cartData[itemId][size]) {
-         cartData[itemId][size] += 1;
-      } else{
+    if (cartData[itemId]) {
+      if (cartData[itemId][size]) {
+        cartData[itemId][size] += 1;
+      } else {
         cartData[itemId][size] = 1;
       }
-     } else{
+    } else {
       cartData[itemId] = {};
       cartData[itemId][size] = 1;
-     }
-     setCartItems(cartData);
-      
-     if(token) {
-      try{
-         await axios.post(`http://localhost:4000/api/cart/add`, {itemId, size}, {headers: {token}});
-      }catch(error) {
-         console.log(error);
-         toast.error(error.message);
-      }
-     }
-  }
-   const getCartCount = () => {
-     let totalCount = 0;
+    }
+    setCartItems(cartData);
 
-     for(const items in cartItems) {
-       for( const item in cartItems[items]) {
-          try {
-           if(cartItems[items][item] > 0) {
-             totalCount += cartItems[items][item];
-           }
-          } catch(error) {
-           console.log(error);
+    if (token) {
+      try {
+        await axios.post(`https://mern-ecommerce-backend-xi.vercel.app/api/cart/add`, { itemId, size }, { headers: { token } });
+      } catch (error) {
+        console.log(error);
+        toast.error(error.message);
+      }
+    }
+  }
+  const getCartCount = () => {
+    let totalCount = 0;
+
+    for (const items in cartItems) {
+      for (const item in cartItems[items]) {
+        try {
+          if (cartItems[items][item] > 0) {
+            totalCount += cartItems[items][item];
           }
-       }
-     }
-     return totalCount;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+    return totalCount;
   }
 
   const updateQuantity = async (itemId, size, quantity) => {
@@ -77,11 +77,11 @@ const ShopContextProvider = ({ children }) => {
     cartData[itemId][size] = quantity;
 
     setCartItems(cartData);
-    if(token) {
-      try{
-        
-        await axios.post(`http://localhost:4000/api/cart/update`, {itemId, size, quantity}, {headers: {token}});
-      }catch(error) {
+    if (token) {
+      try {
+
+        await axios.post(`https://mern-ecommerce-backend-xi.vercel.app/api/cart/update`, { itemId, size, quantity }, { headers: { token } });
+      } catch (error) {
         console.log(error);
         toast.error(error.message);
       }
@@ -89,60 +89,60 @@ const ShopContextProvider = ({ children }) => {
   }
 
   const getCartAmount = () => {
-      let amount = 0;
-      for(const items in cartItems) {
-        let itemInfo = products.find((product) => product._id === items);
-        for(const item in cartItems[items]) {
-          try{
-            if(cartItems[items][item] > 0) {
-              amount += itemInfo.price * cartItems[items][item];
-            }
-          }catch (error) {
-            console.log(error);
+    let amount = 0;
+    for (const items in cartItems) {
+      let itemInfo = products.find((product) => product._id === items);
+      for (const item in cartItems[items]) {
+        try {
+          if (cartItems[items][item] > 0) {
+            amount += itemInfo.price * cartItems[items][item];
           }
+        } catch (error) {
+          console.log(error);
         }
       }
-      return amount;
-  }
- 
-  const getProductData =async () => {
-     
-    try{
-        const response = await axios.get("http://localhost:4000/api/product/list")
-      
-        if(response.data.success){
-          setProducts(response.data.products)
-        }else{
-          toast.error(response.data.message)
-        }
-    }catch(error) {
-      console.log(error);
-        toast.error(error.message);
     }
+    return amount;
   }
 
-  const getUserCart = async (token) => {
-    try{
-      const response = await axios.get("http://localhost:4000/api/cart/get",  {headers: {token}})
-      
-      if(response.data.success) {
-        setCartItems(response.data.cartData);
+  const getProductData = async () => {
+
+    try {
+      const response = await axios.get("https://mern-ecommerce-backend-xi.vercel.app/api/product/list")
+
+      if (response.data.success) {
+        setProducts(response.data.products)
+      } else {
+        toast.error(response.data.message)
       }
-    }catch(error) {
+    } catch (error) {
       console.log(error);
       toast.error(error.message);
     }
   }
 
-  useEffect(()=> {
+  const getUserCart = async (token) => {
+    try {
+      const response = await axios.get("https://mern-ecommerce-backend-xi.vercel.app/api/cart/get", { headers: { token } })
+
+      if (response.data.success) {
+        setCartItems(response.data.cartData);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  }
+
+  useEffect(() => {
     getProductData();
   }, []);
-   
+
   useEffect(() => {
-     if(!token && localStorage.getItem("token")) {
-         setToken(localStorage.getItem('token'));
-         getUserCart(localStorage.getItem('token'));
-     }
+    if (!token && localStorage.getItem("token")) {
+      setToken(localStorage.getItem('token'));
+      getUserCart(localStorage.getItem('token'));
+    }
   }, [token]);
 
   const value = {
@@ -154,7 +154,7 @@ const ShopContextProvider = ({ children }) => {
     showSearch,
     setShowSearch,
     cartItems,
-     addToCart,
+    addToCart,
     getCartCount,
     updateQuantity,
     getCartAmount,
