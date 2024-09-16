@@ -11,7 +11,7 @@ const Orders = ({ token }) => {
     if (!token) return;
 
     try {
-      const response = await axios.post('http://localhost:4000/api/order/list', {}, { headers: { token } });
+      const response = await axios.post('https://mern-ecommerce-backend-xi.vercel.app/api/order/list', {}, { headers: { token } });
 
       if (response.data.success) {
         setOrders(response.data.orders);
