@@ -9,7 +9,7 @@ const List = ({token}) => {
 
   const fetchList = async () => {
     try{
-     const response = await axios.get("http://localhost:4000/api/product/list", {headers:{token}})
+     const response = await axios.get("https://mern-ecommerce-backend-xi.vercel.app/api/product/list", {headers:{token}})
 
      if(response.data.success)
      {
@@ -26,7 +26,7 @@ const List = ({token}) => {
    // Remove a product by id
    const removeProduct = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:4000/api/product/${id}`, { headers: { token } });
+      const response = await axios.delete(`https://mern-ecommerce-backend-xi.vercel.app/api/product/${id}`, { headers: { token } });
 
       if (response.data.success) {
         toast.success( response.data.message || 'Product removed successfully')
