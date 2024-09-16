@@ -32,7 +32,7 @@ const PlaceOrder = () => {
 
   const initPay = (order) => {
     const options = {
-      key: import.meta.env.ROZORPAY_KEY_ID || "rzp_test_WYJNhi7pqm21MU",
+      key: import.meta.env.RAZORPAY_KEY_ID || "rzp_test_WYJNhi7pqm21MU",
       amount: order.amount,
       currency: order.currency,
       name: 'Order Payment',
